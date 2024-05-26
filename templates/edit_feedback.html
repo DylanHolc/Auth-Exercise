@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title%}Edit Feedback{% endblock %}
+{% block content %}
+<h1>Edit Feedback</h1>
+<form action="/feedback/{{feedback.id}}/update" id="edit_feedback_form" method="post">
+    <label for="title">Title: <input type="text" value="{{feedback.title}}" name="title" id=""></label>
+    <label for="content">Content: <input type="text" value="{{feedback.content}}" name="content" id=""></label>
+    <button type="submit">Save</button>
+</form>
+
+{% endblock%}
