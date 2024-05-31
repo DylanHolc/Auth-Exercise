@@ -2,24 +2,28 @@
 {% block title%}Feedback Form{% endblock %}
 {% block content %}
 <h1>Add Feedback</h1>
-<form action="" id="add_feedback_form" method="post">
-    {{ form.hidden_tag() }}
+<div class="container-fluid">
+    <form action="" id="add_feedback_form" method="post">
+        {{ form.hidden_tag() }}
 
-    {% for field in form if field.widget.input_type != 'hidden'%}
+        {% for field in form if field.widget.input_type != 'hidden'%}
 
-    <p>
-        {{ field.label }}
-        {{field}}
+        <div class="d-grid gap-2">
+            {{ field.label }}
+            {{field}}
 
-        {% if field.errors %}
-        {% for error in field.errors %}
-        <b>{{ error }}</b>
-        {% endfor %}
-        {% endif %}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <b>{{ error }}</b>
+            {% endfor %}
+            {% endif %}
 
 
-        {% endfor %}
-    </p>
-    <button type="submit">Add</button>
-</form>
+            {% endfor %}
+        </div>
+        <div class="d-grid m-4 col-4">
+            <button type="submit" class="btn btn-success">Add</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

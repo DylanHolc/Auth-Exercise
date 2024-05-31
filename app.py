@@ -12,7 +12,7 @@ with app.app_context():
 
 @app.route('/')
 def register():
-    return redirect('/register')
+    return render_template('index.html')
 
 @app.route('/register', methods = ['GET', 'POST'])
 def show_register():

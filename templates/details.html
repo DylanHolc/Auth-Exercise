@@ -1,27 +1,40 @@
 {% extends 'base.html' %}
 {% block title%}User Details{% endblock %}
 {% block content %}
-<h1>Profile</h1>
-<p>First Name: {{user.first_name}}</p>
-<p>Last Name: {{user.last_name}}</p>
-<p>Username: {{user.username}}</p>
-<p>Email: {{user.email}}</p>
-<div>
-    {% for feedback in all_feedback%}
-    <h5>{{feedback.title}}</h5>
-    <p>{{feedback.content}}</p>
-    {% if feedback.username == session['username'] %}
-    <form action="get">
-        <button formaction="/feedback/{{feedback.id}}/update">Edit</button>
+<div class="container-fluid d-grid">
+    <h1>Profile</h1>
+    <h4>First Name: {{user.first_name}}</h4>
+    <h4>Last Name: {{user.last_name}}</h4>
+    <h4>Username: {{user.username}}</h4>
+    <h4>Email: {{user.email}}</h4>
+    <div>
+        {% for feedback in all_feedback%}
+        <div class="card col-4 text-center bg-secondary-subtle">
+            <div class="card-header">
+                <h5>{{feedback.title}}</h5>
+            </div>
+            <div class="card-body">
+                <p>{{feedback.content}}</p>
+                <div class="card-footer">
+                    {% if feedback.username == session['username'] %}
+                    <form action="get">
+                        <button formaction="/feedback/{{feedback.id}}/update"
+                            class="btn btn-sm btn-primary d-grid col-2">Edit</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class=" d-grid m-3 col-2">
+        <a href="/users/{{user.username}}/feedback/add" class="btn btn-primary">Add Feedback</a>
+    </div>
+    <form class="">
+        <button class="btn btn-danger d-grid col-2 m-3" formaction="/users/{{ user.username }}/delete"
+            formmethod="POST">
+            Delete User
+        </button>
     </form>
-    {% endif %}
-    {% endfor %}
 </div>
-<a href="/users/{{user.username}}/feedback/add">Add Feedback</a>
-<form>
-    <button class="btn btn-danger btn-sm" formaction="/users/{{ user.username }}/delete" formmethod="POST">
-        Delete User
-    </button>
-</form>
-
 {% endblock %}
